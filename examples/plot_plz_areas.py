@@ -23,7 +23,7 @@ plot = plot_plz_data(
 
 ax.set_extent([4, 16, 47, 56], crs.PlateCarree())
 
-ax.set_title('Inhabitants per Square Kilometert')
+ax.set_title('Inhabitants per Square Kilometer')
 
 fig.colorbar(plot, ax=ax)
 fig.tight_layout()
