@@ -3,6 +3,7 @@ from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 from cartopy import crs
 import numpy as np
+from shapely.geometry import MultiLineString
 
 from .io import load_plz_records
 
@@ -13,10 +14,13 @@ def build_patch_collection(recs):
     for i, rec in enumerate(recs):
         for geom in rec.geometry:
             repeat[i] += 1
-            try:
-                patches.append(Polygon(np.array(geom.boundary.xy).T, closed=True))
-            except NotImplementedError as e:
-                patches.append(Polygon(np.array(geom.boundary[0].xy).T, closed=True))
+
+            if isinstance(geom.boundary, MultiLineString):
+                xy = np.array(geom.boundary[0].xy).T
+            else:
+                xy = np.array(geom.boundary.xy).T
+
+            patches.append(Polygon(xy, closed=True))
 
     return PatchCollection(patches, transform=crs.Mercator.GOOGLE, zorder=2), repeat
 
