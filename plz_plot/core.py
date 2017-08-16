@@ -18,7 +18,7 @@ def build_patch_collection(recs):
             except NotImplementedError as e:
                 patches.append(Polygon(np.array(geom.boundary[0].xy).T, closed=True))
 
-    return PatchCollection(patches, transform=crs.Mercator.GOOGLE), repeat
+    return PatchCollection(patches, transform=crs.Mercator.GOOGLE, zorder=2), repeat
 
 
 def plot_plz_data(
