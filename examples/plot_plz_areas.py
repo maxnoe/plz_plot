@@ -17,8 +17,16 @@ land = feature.NaturalEarthFeature(
     'physical', 'land', '10m',
     facecolor=feature.COLORS['land'],
 )
+lakes = feature.NaturalEarthFeature(
+    'physical', 'lakes', '10m',
+    facecolor=feature.COLORS['water'],
+)
+lakes_europe = feature.NaturalEarthFeature(
+    'physical', 'lakes_europe', '10m',
+    facecolor=feature.COLORS['water'],
+)
 countries = feature.NaturalEarthFeature(
-    'cultural', 'admin0_countries', '10m',
+    'cultural', 'admin_0_countries', '10m',
     facecolor='none',
     edgecolor='k',
 )
@@ -28,16 +36,20 @@ ax.add_feature(countries)
 
 
 df['inhabitants_per_area'] = df['inhabitants'] / df['area']
+df.loc[df['inhabitants'] == 0, 'inhabitants_per_area'] = 1e-3
 
 plot = plot_plz_data(
     df['inhabitants_per_area'],
     ax=ax,
     norm=LogNorm(),
     vmin=1e1,
-    vmax=10e4,
+    vmax=2.5e4,
 )
 plot.set_edgecolor('lightgray')
 plot.set_linewidth(0.2)
+
+ax.add_feature(lakes)
+ax.add_feature(lakes_europe)
 
 ax.set_title('Inhabitants per Square Kilometer')
 
