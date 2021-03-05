@@ -53,6 +53,7 @@ ax.add_feature(lakes_europe)
 
 ax.set_title('Inhabitants per Square Kilometer')
 
-fig.colorbar(plot, ax=ax)
+sm = plt.cm.ScalarMappable(norm=plt.Normalize(vmin=df['inhabitants_per_area'].min(), vmax=df['inhabitants_per_area'].max()))
+fig.colorbar(sm)
 fig.tight_layout()
 fig.savefig('example.png', dpi=300)
