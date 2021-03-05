@@ -2,7 +2,18 @@ from cartopy.io.shapereader import Reader
 from pkg_resources import resource_filename
 import pandas as pd
 
-PATH = resource_filename('plz_plot', 'resources/plz-5stellig')
+_HAS_FIONA = False
+try:
+    import fiona
+    _HAS_FIONA = True
+except ImportError:
+    pass
+
+# Workaround cartopy bug
+if _HAS_FIONA:
+    PATH = resource_filename('plz_plot', 'resources/plz-5stellig.shp')
+else:
+    PATH = resource_filename('plz_plot', 'resources/plz-5stellig')
 
 
 def load_plz_records(path=PATH):
