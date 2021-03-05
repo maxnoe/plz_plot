@@ -12,7 +12,12 @@ def build_patch_collection(recs):
     patches = []
     repeat = np.zeros(len(recs), dtype=int)
     for i, rec in enumerate(recs):
-        for geom in rec.geometry:
+        if rec.geometry.geom_type == 'Polygon':
+            iterable_geo = [rec.geometry]
+        else:
+            iterable_geo = rec.geometry
+
+        for geom in iterable_geo:
             repeat[i] += 1
 
             if isinstance(geom.boundary, MultiLineString):
