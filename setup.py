@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='plz_plot',
-    version='0.0.1',
+    version='0.1.0',
     description='Plot data on a map using cartopy and german postal codes',
     url='http://github.com/MaxNoe/plz_plot',
     author='Maximilian Noethe',
@@ -16,6 +16,7 @@ setup(
             'resources/*',
         ]
     },
+    python_requires='>=3.6',
     tests_require=['pytest>=3.0.0'],
     setup_requires=['pytest-runner'],
     install_requires=[
