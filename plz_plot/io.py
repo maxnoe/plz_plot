@@ -14,7 +14,7 @@ def load_plz_records(path=PATH):
 
 
 def get_plz_dataframe(path=PATH):
-    recs = load_plz_records(PATH)
+    recs = load_plz_records(path)
     df = pd.DataFrame([r.attributes for r in recs]).set_index('plz')
 
     df.rename(
@@ -33,5 +33,5 @@ def get_plz_dataframe(path=PATH):
 
 
 def get_plz_geometries(path=PATH):
-    recs = load_plz_records(PATH)
+    recs = load_plz_records(path)
     return [r.geometry for r in recs]
