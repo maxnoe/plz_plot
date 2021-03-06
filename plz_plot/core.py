@@ -31,14 +31,15 @@ def build_patch_collection(recs):
 
 
 def plot_plz_data(
-        data,
-        cmap=None,
-        vmin=None,
-        vmax=None,
-        ax=None,
-        projection=None,
-        norm=None
-        ):
+    data,
+    cmap=None,
+    vmin=None,
+    vmax=None,
+    ax=None,
+    projection=None,
+    norm=None
+):
+    data = np.asanyarray(data)
 
     recs = load_plz_records()
     col, repeat = build_patch_collection(recs)
